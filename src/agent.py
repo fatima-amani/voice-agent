@@ -1,9 +1,8 @@
-from livekit.agents import function_tool, Agent, RunContext
+from livekit.agents import function_tool, Agent
 from livekit.agents import (
     Agent,
     AgentSession,
     JobContext,
-    RunContext,
     WorkerOptions,
     cli,
     function_tool,
