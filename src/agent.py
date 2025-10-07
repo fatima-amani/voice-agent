@@ -6,7 +6,7 @@ from livekit.agents import (
     cli,
     function_tool,
 )
-from livekit.plugins import deepgram, google, silero
+from livekit.plugins import google
 
 from prompts.agent import get_agent_instruction
 from tools.graph_tool import neo4j_tool
@@ -47,23 +47,15 @@ async def mongo(query: str) -> list:
     """
     return mongo_tool(query)
 
-
-class ProductRecommenderAgent(Agent):
-    pass
-
 async def entrypoint(ctx: JobContext):
     await ctx.connect()
 
-    agent = ProductRecommenderAgent(
+    agent = Agent(
         instructions=get_agent_instruction(),
         tools=[neo4j, mongo]
     )
 
     session = AgentSession(
-        # vad=silero.VAD.load(),
-        # stt=deepgram.STT(model="nova-3"),
-        # llm=google.LLM(model="gemini-2.5-flash"),
-        # tts=deepgram.TTS(),
         llm=google.beta.realtime.RealtimeModel(
             model="gemini-2.0-flash-exp",
             voice="Puck",
