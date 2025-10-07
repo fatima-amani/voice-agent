@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-URI = os.getenv("URI")
-USER = os.getenv("USER")
-PASSWORD = os.getenv("PASSWORD")
-DATABASE = os.getenv("DATABASE")
+NEO4J_URI = os.getenv("NEO4J_URI")
+NEO4J_USER = os.getenv("NEO4J_USER")
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
+NEO4J_DATABASE = os.getenv("NEO4J_DATABASE")
 
 global graph
 graph = None
@@ -17,10 +17,10 @@ def get_graph_db():
     global graph
     if graph is None:
         graph = Neo4jGraph(
-            url=URI, 
-            username=USER, 
-            password=PASSWORD,
-            database=DATABASE,
+            url=NEO4J_URI, 
+            username=NEO4J_USER, 
+            password=NEO4J_PASSWORD,
+            database=NEO4J_DATABASE,
             enhanced_schema=True
         )
     return graph
