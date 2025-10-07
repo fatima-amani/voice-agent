@@ -6,4 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "livekit-agents>=1.2.14",
+    "livekit-plugins-deepgram>=1.2.14",
+    "livekit-plugins-google>=1.2.14",
+    "livekit-plugins-silero>=1.2.14",
 ]
