@@ -1,4 +1,3 @@
-from livekit.agents import function_tool, Agent
 from livekit.agents import (
     Agent,
     AgentSession,
@@ -10,6 +9,7 @@ from livekit.agents import (
 from livekit.plugins import deepgram, google, silero
 from typing import Any
 
+from prompts.agent import get_agent_instruction
 from tools.graph_tool import neo4j_tool
 from tools.mongo_tool import mongo_tool
 
@@ -55,7 +55,7 @@ async def entrypoint(ctx: JobContext):
     await ctx.connect()
 
     agent = ProductRecommenderAgent(
-        instructions="You are a friendly voice assistant built by LiveKit.",
+        instructions=get_agent_instruction(),
         tools=[ProductRecommenderAgent.neo4j, ProductRecommenderAgent.mongo],
     )
 
@@ -67,7 +67,7 @@ async def entrypoint(ctx: JobContext):
     )
 
     await session.start(agent=agent, room=ctx.room)
-    await session.generate_reply(instructions="greet the user and ask about their day")
+    await session.generate_reply(instructions="greet the user and introduce yourself")
 
 
 if __name__ == "__main__":
