@@ -5,6 +5,9 @@ from livekit.agents import (
     WorkerOptions,
     cli,
     function_tool,
+    BackgroundAudioPlayer,
+    BuiltinAudioClip,
+    AudioConfig
 )
 from livekit.plugins import google
 
@@ -56,6 +59,7 @@ async def entrypoint(ctx: JobContext):
     )
 
     session = AgentSession(
+        preemptive_generation=True,
         llm=google.beta.realtime.RealtimeModel(
             model="gemini-2.0-flash-exp",
             voice="Puck",
@@ -65,6 +69,21 @@ async def entrypoint(ctx: JobContext):
 
     await session.start(agent=agent, room=ctx.room)
     await session.generate_reply(instructions="greet the user and introduce yourself")
+
+    background_audio = BackgroundAudioPlayer(
+        # play office ambience sound looping in the background
+        ambient_sound=AudioConfig(BuiltinAudioClip.OFFICE_AMBIENCE, volume=0.8),
+        # play keyboard typing sound when the agent is thinking
+        thinking_sound=[
+            AudioConfig(BuiltinAudioClip.KEYBOARD_TYPING, volume=0.8),
+            AudioConfig(BuiltinAudioClip.KEYBOARD_TYPING2, volume=0.7),
+        ],
+    )
+
+    await background_audio.start(room=ctx.room, agent_session=session)
+
+    # Play another audio file at any time using the play method:
+    # background_audio.play("filepath.ogg")
 
 
 if __name__ == "__main__":
