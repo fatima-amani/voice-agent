@@ -55,8 +55,7 @@ async def entrypoint(ctx: JobContext):
     await ctx.connect()
 
     agent = ProductRecommenderAgent(
-        instructions=get_agent_instruction(),
-        tools=[ProductRecommenderAgent.neo4j, ProductRecommenderAgent.mongo],
+        instructions=get_agent_instruction()
     )
 
     session = AgentSession(
