@@ -918,6 +918,9 @@ wheels = [
 ]
 
 [package.optional-dependencies]
+anam = [
+    { name = "livekit-plugins-anam" },
+]
 codecs = [
     { name = "av" },
     { name = "numpy" },
@@ -949,6 +952,18 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/71/e2/3c1671f7ed50db09813f6f06581b3acc93935f88352f96ce141b93e1f098/livekit_blingfire-1.0.0-cp313-cp313-manylinux_2_24_aarch64.manylinux_2_28_aarch64.whl", hash = "sha256:3c8d3a92a34925063ac05e70f6d4eebfeb9f9e29816868dece7159688b68cefe", size = 158534, upload-time = "2025-06-30T14:56:23.616Z" },
     { url = "https://files.pythonhosted.org/packages/14/e6/9f21edfdc7284d89e3f6a61db662e5b4eda45a7657628dd55308164386c0/livekit_blingfire-1.0.0-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl", hash = "sha256:212ffef06b2e832758afcd1d19c709068207ad71f2fb5b426b6bb8e2773e9673", size = 167224, upload-time = "2025-06-30T14:56:24.811Z" },
     { url = "https://files.pythonhosted.org/packages/1f/d0/307cc89438888067a17a0c33329d59867516a616aab7618dcb43987165ea/livekit_blingfire-1.0.0-cp313-cp313-win_amd64.whl", hash = "sha256:f3f4df6a51171a88c6863cea01c607661d6d6bc0398976a37ba0e4b3e3283433", size = 125486, upload-time = "2025-06-30T14:56:26.1Z" },
+]
+
+[[package]]
+name = "livekit-plugins-anam"
+version = "1.2.14"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "livekit-agents" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/64/ab/eecc35090c7e2e57c8caa9e38753893cf658ca33130cd386d14b36e6d567/livekit_plugins_anam-1.2.14.tar.gz", hash = "sha256:b9fe620c5a6568b59e312bfae8238de4ac372d4e8b80aa24f27bc52dd3667a90", size = 6072, upload-time = "2025-10-01T17:55:02.107Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/a7/3b/83a03a468ba85463fed20e8c2495be817d123d9f4098d5818a66c5009efe/livekit_plugins_anam-1.2.14-py3-none-any.whl", hash = "sha256:926da1a946c07d549d4ce143c439986322c15250ef088124ae0f9acde5c95b13", size = 7031, upload-time = "2025-10-01T17:55:00.885Z" },
 ]
 
 [[package]]
@@ -1927,7 +1942,7 @@ dependencies = [
     { name = "langchain-google-genai" },
     { name = "langchain-mongodb" },
     { name = "langchain-neo4j" },
-    { name = "livekit-agents" },
+    { name = "livekit-agents", extra = ["anam"] },
     { name = "livekit-plugins-deepgram" },
     { name = "livekit-plugins-google" },
     { name = "livekit-plugins-silero" },
@@ -1940,7 +1955,7 @@ requires-dist = [
     { name = "langchain-google-genai", specifier = ">=2.1.12" },
     { name = "langchain-mongodb", specifier = ">=0.7.0" },
     { name = "langchain-neo4j", specifier = ">=0.5.0" },
-    { name = "livekit-agents", specifier = ">=1.2.14" },
+    { name = "livekit-agents", extras = ["anam"], specifier = "~=1.2" },
     { name = "livekit-plugins-deepgram", specifier = ">=1.2.14" },
     { name = "livekit-plugins-google", specifier = ">=1.2.14" },
     { name = "livekit-plugins-silero", specifier = ">=1.2.14" },

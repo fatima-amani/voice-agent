@@ -9,7 +9,7 @@ from livekit.agents import (
     BuiltinAudioClip,
     AudioConfig
 )
-from livekit.plugins import google
+from livekit.plugins import google, anam
 
 from prompts.agent import get_agent_instruction
 from tools.graph_tool import neo4j_tool
@@ -62,10 +62,20 @@ async def entrypoint(ctx: JobContext):
         preemptive_generation=True,
         llm=google.beta.realtime.RealtimeModel(
             model="gemini-2.0-flash-exp",
-            voice="Puck",
+            voice="Aoede", # Sulafat Despina Aoede
             temperature=0.8
         ),
     )
+
+    avatar = anam.AvatarSession(
+      persona_config=anam.PersonaConfig(
+         name="Cara",  # Name of the avatar to use.
+         avatarId="d9ebe82e-2f34-4ff6-9632-16cb73e7de08"  # ID of the avatar to use. See "Avatar setup" for details.
+      ),
+    )
+
+    # Start the avatar and wait for it to join
+    await avatar.start(session, room=ctx.room)
 
     await session.start(agent=agent, room=ctx.room)
     await session.generate_reply(instructions="greet the user and introduce yourself")
