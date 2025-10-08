@@ -35,5 +35,6 @@ def neo4j_tool(user_query: str) -> dict:
     )
     
     response = chain.invoke({"query": user_query})
-    return response
+    # Extract only the serializable result, not the entire response object
+    return {"result": response.get("result", "No results found")}
 
